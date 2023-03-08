@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "263851996817",
+    "project_id": "bookapp-5479d",
+    "storage_bucket": "bookapp-5479d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:263851996817:android:7fae5ae4752a65d0d0f130",
+        "android_client_info": {
+          "package_name": "com.hera.bookapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "263851996817-7au7q3ne583dthcucmn98ppq2q7pes7f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAurswB-jtQW24LYE3uNj2zC76SL8bbr-8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "263851996817-7au7q3ne583dthcucmn98ppq2q7pes7f.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
