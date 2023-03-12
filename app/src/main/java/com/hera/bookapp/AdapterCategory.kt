@@ -1,6 +1,7 @@
 package com.hera.bookapp
 
 import android.app.AlertDialog
+import android.content.Intent
 import android.view.Display.Mode
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -43,7 +44,17 @@ class AdapterCategory(public  var categoryArrayList: ArrayList<ModelCategory>): 
                 }
                 .show()
         }
+
+        //handle click, start pdf list admin activity,also pas pdf id,title
+        holder.itemView.setOnClickListener {
+            val intent=Intent(holder.itemView.context,PdfListAdminActivity::class.java)
+            intent.putExtra("categoryId",id)
+            intent.putExtra("category",currentlist.category)
+        }
     }
+
+
+
 
     private fun deleteCategory(model:ModelCategory,holder: Myviewholder) {
         //get id of category to delete

@@ -64,6 +64,8 @@ class DashboardAdminActivity : AppCompatActivity() {
         }
     }
 
+
+
     private fun loadCategories() {
         categoryArrayList = ArrayList()
 

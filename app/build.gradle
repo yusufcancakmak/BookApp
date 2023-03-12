@@ -56,4 +56,8 @@ dependencies {
     implementation 'com.google.firebase:firebase-database-ktx'
     //storage
     implementation 'com.google.firebase:firebase-storage-ktx'
+    //pdf library
+    implementation 'com.github.barteksc:android-pdf-viewer:2.8.2'
+
+
 }
