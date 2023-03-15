@@ -56,6 +56,10 @@ private companion object{
             }
 
         })
+        //hanndle click , goback
+        binding.backBtn.setOnClickListener {
+            onBackPressed()
+        }
     }
 
     @SuppressLint("SuspiciousIndentation")

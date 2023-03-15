@@ -1,5 +1,7 @@
 package com.hera.bookapp
 
+import android.app.AlertDialog
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Filter
@@ -10,6 +12,7 @@ import com.hera.bookapp.databinding.RowPdfAdminBinding
 class AdapterPdfAdmin(public var pdfarraylist:ArrayList<ModelPdf>):RecyclerView.Adapter<AdapterPdfAdmin.MyViewHolder>(),Filterable{
 
     inner class MyViewHolder(val binding: RowPdfAdminBinding):RecyclerView.ViewHolder(binding.root)
+    //filter object
     private var filter:FilterPdfAdmin?=null
     private lateinit var filterlist:ArrayList<ModelPdf>
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
@@ -37,6 +40,37 @@ class AdapterPdfAdmin(public var pdfarraylist:ArrayList<ModelPdf>):RecyclerView.
         //load pdf size
         MyApplication.loadPdfSiz(currentlist.url,currentlist.title,holder.binding.sizeTv)
 
+        //handle click, show dialog with options 1) edit book, 2) delete book
+        holder.binding.moreBTN.setOnClickListener {
+            moreOptionsDialog(currentlist, holder)
+        }
+
+    }
+
+    private fun moreOptionsDialog(currentlist: ModelPdf, holder: AdapterPdfAdmin.MyViewHolder) {
+        //get id, url title of book
+        val bookId = currentlist.id
+        val bookUrl =currentlist.url
+        val bookTtitle= currentlist.title
+        //options to show in dialog
+        val options= arrayOf("Edit","Delete")
+
+        //alert dialog
+        val builder =AlertDialog.Builder(holder.itemView.context)
+        builder.setItems(options){dialog, position->
+            //handle item click
+            if (position==0){
+                //edit is clik
+                val intent=Intent(holder.itemView.context,PdfEditActivity::class.java)
+                intent.putExtra("bookId",bookId)//passed bookıD, will be used edit he book
+                holder.itemView.context.startActivity(intent)
+            }
+            else if (position==1){
+                //delete is click, create fun in myapplicaton
+            }
+
+        }
+            .show()
     }
 
 

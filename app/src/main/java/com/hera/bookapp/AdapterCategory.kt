@@ -50,6 +50,7 @@ class AdapterCategory(public  var categoryArrayList: ArrayList<ModelCategory>): 
             val intent=Intent(holder.itemView.context,PdfListAdminActivity::class.java)
             intent.putExtra("categoryId",id)
             intent.putExtra("category",currentlist.category)
+            holder.itemView.context.startActivity(intent)
         }
     }
 

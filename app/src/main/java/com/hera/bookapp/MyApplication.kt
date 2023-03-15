@@ -1,6 +1,7 @@
 package com.hera.bookapp
 
 import android.app.Application
+import android.content.Context
 import android.util.Log
 import android.view.View
 import android.widget.ProgressBar
@@ -127,6 +128,10 @@ class MyApplication : Application() {
                     }
 
                 })
+        }
+
+        fun deletebook(context: Context, bookId:String,bookurl:String,bookTitle:String){
+            // to tommorow end
         }
     }
 
