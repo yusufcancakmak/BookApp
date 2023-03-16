@@ -1,11 +1,13 @@
 package com.hera.bookapp
 
 import android.app.Application
+import android.app.ProgressDialog
 import android.content.Context
 import android.util.Log
 import android.view.View
 import android.widget.ProgressBar
 import android.widget.TextView
+import android.widget.Toast
 import com.github.barteksc.pdfviewer.PDFView
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -17,6 +19,7 @@ import org.w3c.dom.Text
 import java.sql.Timestamp
 import java.text.DateFormat
 import java.util.*
+import kotlin.collections.HashMap
 
 class MyApplication : Application() {
     override fun onCreate() {
@@ -131,7 +134,86 @@ class MyApplication : Application() {
         }
 
         fun deletebook(context: Context, bookId:String,bookurl:String,bookTitle:String){
-            // to tommorow end
+            //param details
+            //1)context, used when require e.g for progressdialog toas
+            //2)bookıd, to delete book from db
+            //3)bookurl,delte book from firebase storage
+            //3)booktitle, show in dialog etc
+
+            val TAG="DELETE_BOOK_TAG"
+            Log.d(TAG,"deletebook: deleteing...")
+
+            //progress dialog
+            val progressDialog=ProgressDialog(context)
+            progressDialog.setTitle( "Please wait")
+            progressDialog.setMessage("deleting $bookTitle...")
+            progressDialog.setCanceledOnTouchOutside(false)
+            progressDialog.show()
+
+            Log.d(TAG,"DELETEBOOK: dELTİNG FROM STROAGE....")
+            val storage=FirebaseStorage.getInstance().getReferenceFromUrl(bookurl)
+            storage.delete()
+                .addOnSuccessListener {
+                    Log.d(TAG,"deletebook: deleted from storage")
+                    Log.d(TAG,"DELETEBOOK:DELETİNG FROM DB NOW...")
+
+                    val ref=FirebaseDatabase.getInstance().getReference("Books")
+                    ref.child(bookId)
+                        .removeValue()
+                        .addOnSuccessListener {
+                            progressDialog.dismiss()
+                            Toast.makeText(context,"sucessfully",Toast.LENGTH_SHORT).show()
+
+                        }
+                        .addOnFailureListener {e->
+                            Log.d(TAG,"deletebook: Failed to from firebase db ${e.message}")
+
+                            Toast.makeText(context,"Failed to delete from db due to${e.message}",Toast.LENGTH_SHORT).show()
+                        }
+
+                }
+                .addOnFailureListener {e->
+                    //failed
+                    Log.d(TAG,"deletebook: Failed to from firebase ${e.message}")
+
+                    Toast.makeText(context,"Failed to delete from strage due to${e.message}",Toast.LENGTH_SHORT).show()
+
+                }
+
+        }
+
+        fun incrementBookViewCount(bookId:String){
+            //get current book views count
+
+            val ref=FirebaseDatabase.getInstance().getReference("Books")
+            ref.child(bookId)
+                .addListenerForSingleValueEvent(object :ValueEventListener{
+                    override fun onDataChange(snapshot: DataSnapshot) {
+                       //get views count
+                        var viewsCount =""+ snapshot.child("viewCount").value
+                        if (viewsCount==""|| viewsCount=="null"){
+                            viewsCount = "0";
+                        }
+                        //2Increment views count
+                        val newViewsCount = viewsCount.toLong() + 1
+
+                        //setup data to update in db
+
+                        val hashmap=HashMap<String,Any>()
+                        hashmap["viewsCount"] = newViewsCount
+
+                        //set to db
+
+                        val dbref=FirebaseDatabase.getInstance().getReference("Books")
+                        dbref.child(bookId)
+                            .updateChildren(hashmap)
+                    }
+
+                    override fun onCancelled(error: DatabaseError) {
+
+                    }
+
+                })
         }
     }
 

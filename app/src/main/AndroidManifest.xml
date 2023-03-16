@@ -13,6 +13,12 @@
         android:theme="@style/Theme.BookApp"
         tools:targetApi="31">
         <activity
+            android:name=".PdfViewActivity"
+            android:exported="false" />
+        <activity
+            android:name=".PdfDetailsActivity"
+            android:exported="false" />
+        <activity
             android:name=".PdfEditActivity"
             android:exported="false" />
         <activity

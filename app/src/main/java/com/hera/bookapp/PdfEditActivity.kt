@@ -37,6 +37,7 @@ class PdfEditActivity : AppCompatActivity() {
         progressDialog.setCanceledOnTouchOutside(true)
 
         loadCategories()
+        loadBookInfo()
         //handle click, goback
         binding.backBtn.setOnClickListener {
             onBackPressed()
@@ -49,6 +50,48 @@ class PdfEditActivity : AppCompatActivity() {
 
         }
     }
+
+    private fun loadBookInfo() {
+        Log.d(TAG,"LOADBOOKINFO: Loading book info")
+
+        val ref = FirebaseDatabase.getInstance().getReference("Books")
+        ref.child(bookId )
+            .addListenerForSingleValueEvent(object :ValueEventListener{
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    selectedCategoryId =snapshot.child("categoryId").value.toString()
+                    val description= snapshot.child("description").value.toString()
+                    val title =snapshot.child("title").value.toString()
+
+                    //set to views
+                    binding.titleEt.setText(title)
+                    binding.descriptionEt.setText(description)
+
+                    //load book cateogry info using categoryId
+                    Log.d(TAG,"onDataChange:Loading book category info")
+                    val refbookcategory = FirebaseDatabase.getInstance().getReference("Category")
+                    refbookcategory.child(selectedCategoryId)
+                        .addListenerForSingleValueEvent(object :ValueEventListener{
+                            override fun onDataChange(snapshot: DataSnapshot) {
+
+                                val category = snapshot.child("category").value
+                                //set to textview
+                                binding.categoryTv.text=category.toString()
+                            }
+
+                            override fun onCancelled(error: DatabaseError) {
+
+                            }
+
+                        })
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+
+                }
+
+            })
+    }
+
     private var title =""
     private var description =""
 

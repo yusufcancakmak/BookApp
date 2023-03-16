@@ -45,6 +45,14 @@ class AdapterPdfAdmin(public var pdfarraylist:ArrayList<ModelPdf>):RecyclerView.
             moreOptionsDialog(currentlist, holder)
         }
 
+        //handle itemclick /pdfdetailsActivity activity , lets create it first
+        holder.itemView.setOnClickListener {
+        val intent=Intent(holder.itemView.context,PdfDetailsActivity::class.java)
+            intent.putExtra("bookId",currentlist.id) //wiiil be used load pdf details
+            holder.itemView.context.startActivity(intent)
+
+        }
+
     }
 
     private fun moreOptionsDialog(currentlist: ModelPdf, holder: AdapterPdfAdmin.MyViewHolder) {
@@ -67,6 +75,9 @@ class AdapterPdfAdmin(public var pdfarraylist:ArrayList<ModelPdf>):RecyclerView.
             }
             else if (position==1){
                 //delete is click, create fun in myapplicaton
+
+                //show confirm dialog firest if you need...
+                MyApplication.deletebook(holder.itemView.context,bookId,bookUrl,bookTtitle)
             }
 
         }
