@@ -106,8 +106,8 @@
             android:drawablePadding="10dp"
             android:inputType="textMultiLine|textCapSentences"
             android:padding="10dp"
-            android:text="Book Description"
-            android:textColor="@color/gray01"
+            android:hint="Book Description"
+            android:textColor="@color/black"
             android:textColorHint="@color/gray01"
             android:textSize="16dp"
             tools:ignore="TouchTargetSizeCheck" />

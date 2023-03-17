@@ -104,8 +104,6 @@ class MyApplication : Application() {
                             }
                         }
                         .load()
-
-
                 }
                 .addOnFailureListener { e ->
                     //failed to get metadata
