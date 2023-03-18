@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="140dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/white"
+    android:layout_marginBottom="5dp"
+    app:cardCornerRadius="5dp"
+    app:cardElevation="0dp"
+    app:contentPadding="5dp">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:id="@+id/pdfRL"
+            android:layout_width="100dp"
+            android:layout_height="140dp"
+            android:background="@color/gray02"
+            android:layout_marginEnd="5dp">
+
+            <com.github.barteksc.pdfviewer.PDFView
+                android:id="@+id/pdf_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+            <ProgressBar
+                android:id="@+id/progressbar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+        </RelativeLayout>
+        <!--textview:Book Descriptions-->
+
+        <TextView
+            android:id="@+id/title_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/TextAppearance.MaterialComponents.Headline6"
+            android:text="Book Title"
+            android:layout_toEndOf="@+id/pdfRL"
+            android:maxLines="1"
+            android:ellipsize="end"/>
+
+        <TextView
+            android:id="@+id/descriptiontv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/TextAppearance.MaterialComponents.Body2"
+            android:text="Book description"
+            android:layout_marginTop="8dp"
+            android:layout_toEndOf="@+id/pdfRL"
+            android:layout_below="@+id/title_tv"
+            android:maxLines="4"
+            android:ellipsize="end"/>
+        <TextView
+            android:id="@+id/categoryTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/TextAppearance.MaterialComponents.Caption"
+            android:text="Category"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:maxLines="1"
+            />
+        <TextView
+            android:id="@+id/sizeTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/TextAppearance.MaterialComponents.Caption"
+            android:text="14MB"
+            android:layout_toEndOf="@id/pdfRL"
+            android:layout_alignParentBottom="true"
+            android:maxLines="1"
+            />
+        <TextView
+            android:id="@+id/dateTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/TextAppearance.MaterialComponents.Caption"
+            android:text="dd/mm/yyyy"
+            android:layout_toEndOf="@id/sizeTv"
+            android:textAlignment="center"
+            android:layout_alignParentBottom="true"
+            android:layout_toStartOf="@id/categoryTv"
+            android:maxLines="1"
+            />
+
+        <!--textview:Book category-->
+        <!--textview:Book size kb/ mb bytes-->
+        <!--textview:Book added date-->
+
+
+
+
+    </RelativeLayout>
+
+
+
+</androidx.cardview.widget.CardView>

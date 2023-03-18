@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/back01"
     tools:context=".DashBoardUserActivity">
 
     <RelativeLayout
@@ -43,5 +44,25 @@
 
 
     </RelativeLayout>
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tabLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:layout_margin="5dp"
+        app:tabIndicatorFullWidth="false"
+        app:tabBackground="@drawable/tab_selector"
+        android:layout_below="@+id/toolbarRl"
+        app:tabIndicatorHeight="0dp"
+        app:tabMode="scrollable"/>
+
+    <!--View Pager:Show categorized books in fragment-->
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/view_Pager"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tabLayout"/>
+
 
 </RelativeLayout>

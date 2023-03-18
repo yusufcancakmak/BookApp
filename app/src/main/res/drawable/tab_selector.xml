@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:drawable="@drawable/tab_background_selected" android:state_seleted="true"/>
+    <item android:drawable="@drawable/tab_background_unseleted"/>
+</shape>
